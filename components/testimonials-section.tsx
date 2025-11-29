@@ -1,3 +1,5 @@
+"use client"
+
 import { Card } from "@/components/ui/card"
 import { Star } from "lucide-react"
 
@@ -18,7 +20,7 @@ const testimonials = [
     image: "/professional-man.jpg",
     content:
       "The AI-powered workflows are game-changing. What used to take hours of coordination now happens automatically. Best investment we've made.",
-    rating: 5,
+    rating: 4,
   },
   {
     name: "Emily Watson",
@@ -29,11 +31,38 @@ const testimonials = [
       "As a fast-growing startup, we needed tools that could scale with us. FlowSync delivered beyond expectations. The team adopted it instantly.",
     rating: 5,
   },
+  {
+    name: "David Kim",
+    role: "CTO",
+    company: "CloudScale Systems",
+    image: "/asian-professional-man.png",
+    content:
+      "The integration capabilities are outstanding. We connected all our tools in under a day. Our team's efficiency has doubled since adopting FlowSync.",
+    rating: 5,
+  },
+  {
+    name: "Jennifer Martinez",
+    role: "Head of Operations",
+    company: "Global Dynamics",
+    image: "/professional-woman-glasses.png",
+    content:
+      "Security and compliance were our top concerns. FlowSync exceeded all our requirements while making our workflows incredibly smooth.",
+    rating: 4,
+  },
+  {
+    name: "Ahmed Hassan",
+    role: "Director of Technology",
+    company: "NextGen Solutions",
+    image: "/middle-eastern-professional.png",
+    content:
+      "We've tried many collaboration tools, but FlowSync is the only one our entire team loves. The ROI was clear within the first month.",
+    rating: 5,
+  },
 ]
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-20 sm:py-24">
+    <section id="testimonials" className="py-20 sm:py-24 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-16">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-balance mb-4">
@@ -44,32 +73,34 @@ export function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="p-6 bg-card border-border">
-              <div className="mb-4 flex gap-1">
-                {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star key={i} className="h-5 w-5 fill-primary text-primary" />
-                ))}
-              </div>
+        <div className="relative">
+          <div className="flex gap-6 animate-scroll">
+            {[...testimonials, ...testimonials].map((testimonial, index) => (
+              <Card key={index} className="p-6 bg-card border-border flex-shrink-0 w-[400px]">
+                <div className="mb-4 flex gap-1">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
+                  ))}
+                </div>
 
-              <p className="mb-6 text-foreground leading-relaxed">"{testimonial.content}"</p>
+                <p className="mb-6 text-foreground leading-relaxed">"{testimonial.content}"</p>
 
-              <div className="flex items-center gap-3">
-                <img
-                  src={testimonial.image || "/placeholder.svg"}
-                  alt={testimonial.name}
-                  className="h-12 w-12 rounded-full object-cover"
-                />
-                <div>
-                  <div className="font-semibold">{testimonial.name}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {testimonial.role} at {testimonial.company}
+                <div className="flex items-center gap-3">
+                  <img
+                    src={testimonial.image || "/placeholder.svg"}
+                    alt={testimonial.name}
+                    className="h-12 w-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <div className="font-semibold">{testimonial.name}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {testimonial.role} at {testimonial.company}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Social proof stats */}
@@ -88,6 +119,22 @@ export function TestimonialsSection() {
           </div>
         </div>
       </div>
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-scroll {
+          animation: scroll 40s linear infinite;
+        }
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   )
 }

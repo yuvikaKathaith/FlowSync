@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Check } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Check } from "lucide-react";
 
 const plans = [
   {
@@ -55,7 +55,7 @@ const plans = [
     cta: "Contact Sales",
     popular: false,
   },
-]
+];
 
 export function PricingSection() {
   return (
@@ -66,7 +66,8 @@ export function PricingSection() {
             Simple, transparent pricing
           </h2>
           <p className="text-lg text-muted-foreground text-balance">
-            Choose the plan that's right for your team. All plans include a 14-day free trial.
+            Choose the plan that's right for your team. All plans include a
+            14-day free trial.
           </p>
         </div>
 
@@ -95,7 +96,14 @@ export function PricingSection() {
                 </div>
               </div>
 
-              <Button className="w-full mb-6" variant={plan.popular ? "default" : "outline"}>
+              <Button
+                className={`w-full mb-6 transition-all ${
+                  plan.popular
+                    ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:bg-blue-600 hover:from-blue-600 hover:to-blue-600"
+                    : "border border-border hover:bg-blue-600 hover:text-white hover:border-blue-600"
+                }`}
+                variant={plan.popular ? "default" : "outline"}
+              >
                 {plan.cta}
               </Button>
 
@@ -103,7 +111,9 @@ export function PricingSection() {
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-start gap-3">
                     <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-sm text-muted-foreground">{feature}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -121,5 +131,5 @@ export function PricingSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
